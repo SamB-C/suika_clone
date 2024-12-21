@@ -1,12 +1,13 @@
 import sys
 import pygame
+from balls import BALLS
 
 import ballmotion
 
 pygame.init()
 
 # Sets width and height of the screen
-size = width, height = 320, 240
+size = width, height = 600, 600
 speed = [2, 2]
 black = 0, 0, 0
 
@@ -21,12 +22,26 @@ fps = 60
 gravity = 9.8
 
 # Loads the image
-ball = pygame.image.load("intro_ball.gif")
-ballrect = ball.get_rect()
+ball = BALLS[0]
+radius = ball["radius"]
+ballrect = pygame.Rect(width // 2 - radius, height //
+                       2 - radius, radius * 2, radius * 2)
+
+# Box
+wallleft = pygame.Surface((10, height))
+wallleft.fill((255, 255, 255))
+wallright = pygame.Surface((10, height))
+wallright.fill((255, 255, 255))
+wallbottom = pygame.Surface((width, 10))
+wallbottom.fill((255, 255, 255))
+
+wallleftrect = wallleft.get_rect(topleft=(0, 0))
+wallrightrect = wallright.get_rect(topright=(width, 0))
+wallbottomrect = wallbottom.get_rect(bottomleft=(0, height))
 
 # Main loop
 while True:
-    # Quit event
+    # Event Handler
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
@@ -35,7 +50,6 @@ while True:
 
     # Moves the ball
     ballrect = ballrect.move(speed)
-    print(ballrect.bottom, speed[1])
     if ballrect.left < 0 or ballrect.right > width:
         speed[0] = -speed[0]
     if ballrect.top < 0 or ballrect.bottom > height:
@@ -46,8 +60,14 @@ while True:
 
     # Fills the screen with black
     screen.fill(black)
-    # Draws the ball
-    screen.blit(ball, ballrect)
+    # Draws the ball and walls
+
+    screen.blit(wallleft, wallleftrect)
+    screen.blit(wallright, wallrightrect)
+    screen.blit(wallbottom, wallbottomrect)
+
+    pygame.draw.circle(screen, ball["colour"], ballrect.center, radius)
+
     # Updates the screen
     pygame.display.flip()
     # Waits for next frame
