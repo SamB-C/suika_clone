@@ -50,8 +50,6 @@ while True:
         if event.type == pygame.QUIT:
             sys.exit()
 
-    # Checks whether ball should be accelerated then accelerates ball
-
     # Fills the screen with black
     screen.fill(black)
     # Draws the ball and walls
@@ -77,7 +75,7 @@ while True:
         if ball["ballrect"].top < 0 or ball["ballrect"].bottom > height:
             ball["speed"][1] = -ball["speed"][1]
 
-        # Accelerates ball
+        # Checks whether ball should be accelerated then accelerates ball
         if not close_to_floor(ball["ballrect"], wallbottomrect.top):
             ball["speed"] = calc_speed(
                 ball["speed"], gravity, fps, walls, ball["ballrect"])
