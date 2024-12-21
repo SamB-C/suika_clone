@@ -28,9 +28,8 @@ The order of the balls from small to large are:
 ## Settings
 
 Add values that you consistently change when debugging to the settings.py file.
-This file is exempt from git, so any changes to it aren't committed.
 
-This should reduce the number of merge conflicts, but bear in mind that your settings are therefore local and not shared to other developers, so may explain any discrepency in output.
+This should contain the all inconsequential merge conflicts into one file.
 
 ## Contributions
 
