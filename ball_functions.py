@@ -61,6 +61,25 @@ def calculate_speed_after_collision(ball1: BallRectType, ball2: BallRectType):
     return new_speed1, new_speed2
 
 
+def calculate_merge_speed(ball1: BallRectType, ball2: BallRectType):
+    ball1_speed = ball1["speed"]
+    ball2_speed = ball2["speed"]
+
+    ball1_mass = ball1["ball_constants"]["radius"]
+    ball2_mass = ball2["ball_constants"]["radius"]
+
+    ball1_momentum = [ball1_speed[0] * ball1_mass, ball1_speed[1] * ball1_mass]
+    ball2_momentum = [ball2_speed[0] * ball2_mass, ball2_speed[1] * ball2_mass]
+
+    total_momentum = [ball1_momentum[0] + ball2_momentum[0],
+                      ball1_momentum[1] + ball2_momentum[1]]
+    total_mass = ball1_mass + ball2_mass
+    final_speed = [total_momentum[0] / total_mass,
+                   total_momentum[1] / total_mass]
+
+    return final_speed
+
+
 def reduce_speed(speed: list[int]) -> list[int]:
     '''Reduces the speed of the ball by 1 in the x and y direction'''
     return [0.8 * speed[0], 0.8 * speed[1]]
