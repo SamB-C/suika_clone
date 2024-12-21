@@ -1,5 +1,6 @@
 from typing import List
 from dict_types import BallType
+from pygame import Rect
 
 
 DARK_RED1: BallType = {
@@ -61,3 +62,10 @@ BALLS: List[BallType] = [
     LIME_GREEN10,
     DARK_GREEN11
 ]
+
+
+def create_ball(ball_number, screen_width, screen_height, initial_speed):
+    ball = BALLS[ball_number - 1]
+    ballrect = Rect(screen_width // 2 - ball["radius"], screen_height //
+                    2 - ball["radius"], ball["radius"] * 2, ball["radius"] * 2)
+    return {"ball_constants": ball, "ballrect": ballrect, "speed": initial_speed}

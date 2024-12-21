@@ -1,6 +1,6 @@
 import sys
 import pygame
-from balls import BALLS
+from balls import BALLS, create_ball
 from typing import List
 from dict_types import BallRectType
 
@@ -25,11 +25,8 @@ gravity = 9.8
 
 #  Creates the balls
 balls: List[BallRectType] = []
-for ball in BALLS:
-    ballrect = pygame.Rect(width // 2 - ball["radius"], height //
-                           2 - ball["radius"], ball["radius"] * 2, ball["radius"] * 2)
-    balls.append(
-        {"ball_constants": ball, "ballrect": ballrect, "speed": speed})
+for i in range(len(BALLS)):
+    balls.append(create_ball(i+1, width, height, speed))
 
 # Box
 wallleft = pygame.Surface((10, height))
@@ -51,16 +48,7 @@ while True:
         if event.type == pygame.QUIT:
             sys.exit()
 
-    # Moves the ball
-    ballrect = ballrect.move(speed)
-    if ballrect.left < 0 or ballrect.right > width:
-        speed[0] = -speed[0]
-    if ballrect.top < 0 or ballrect.bottom > height:
-        speed[1] = -0.8 * speed[1]
-
     # Checks whether ball should be accelerated then accelerates ball
-    if not ballmotion.close_to_bottom(ballrect, wallbottomrect.top):
-        speed = ballmotion.calc_speed(speed, gravity, fps)
 
     # Fills the screen with black
     screen.fill(black)
@@ -75,6 +63,7 @@ while True:
         if event.type == pygame.QUIT:
             sys.exit()
 
+    # Moves the balls to next positions and renders them
     for ball in balls:
         colour = ball["ball_constants"]["colour"]
         radius = ball["ball_constants"]["radius"]
@@ -87,7 +76,8 @@ while True:
             ball["speed"][1] = -ball["speed"][1]
 
         # Accelerates ball
-        ball["speed"] = ballmotion.calc_speed(ball["speed"], gravity, fps)
+        if not ballmotion.close_to_bottom(ball["ballrect"], wallbottomrect.top):
+            ball["speed"] = ballmotion.calc_speed(ball["speed"], gravity, fps)
 
         pygame.draw.circle(
             screen, colour, ball["ballrect"].center, radius)
