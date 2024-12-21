@@ -27,13 +27,15 @@ gravity = 9.8
 
 #  Creates the balls
 balls: List[BallRectType] = []
-for i in range(2):
+# balls_to_create = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+balls_to_create = 20 * [1]
+for i in balls_to_create:
     # Get coordinates of where to place top left corner of ball
     x, y = get_random_top_position(
-        width, height, BALLS[0]["radius"])
+        width, height, BALLS[i-1]["radius"])
     speed = get_random_speed()
     # Create ball and add to the list of balls
-    balls.append(create_ball(1, x, y, speed))
+    balls.append(create_ball(i, x, y, speed))
 
 # Box
 wallleft = pygame.Surface((WALL_WIDTH, height))
@@ -96,11 +98,12 @@ while True:
                     ball["speed"][0] = -ball["speed"][0]
                     ball["speed"][1] = -ball["speed"][1]
                     # Get distance between ball centers
-                    diff = get_distance_between_ball_centers(ball, other_ball)
+                    diff_centres = get_distance_between_ball_centers(
+                        ball, other_ball)
                     # Get speed of other ball
                     other_ball_speed = get_speed_magnitude(ball["speed"])
                     # If the balls are too close, move them apart
-                    if other_ball_speed < 1.2 * diff:
+                    if other_ball_speed < 2 * diff_centres:
                         other_ball["ballrect"] = other_ball["ballrect"].move(
                             other_ball["speed"][0] * 2, other_ball["speed"][1] * 2)
 
