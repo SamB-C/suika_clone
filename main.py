@@ -1,6 +1,5 @@
-import pygame
 import sys
-
+import pygame
 pygame.init()
 
 # Sets width and height of the screen
@@ -44,10 +43,12 @@ while True:
     # Fills the screen with black
     screen.fill(black)
     # Draws the ball and walls
-    pygame.draw(circle, ballrect)
+    
     screen.blit(wallleft, wallleftrect)
     screen.blit(wallright, wallrightrect)
     screen.blit(wallbottom, wallbottomrect)
+
+    pygame.draw.circle(screen, (255, 255, 255), ballrect.center, radius)
 
     # Updates the screen
     pygame.display.flip()
