@@ -35,7 +35,7 @@ DARK_ORANGE5: BallType = {
 }
 LIGHT_RED6: BallType = {
     "id": 6,
-    "colour": (255, 102, 102),
+    "colour": (255, 60, 60),
     "radius": 60,
     "score": 12
 }
@@ -53,7 +53,7 @@ PINK8: BallType = {
 }
 LEMON_YELLOW9: BallType = {
     "id": 9,
-    "colour": (255, 255, 224),
+    "colour": (205, 205, 174),
     "radius": 90,
     "score": 18
 }
