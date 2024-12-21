@@ -36,11 +36,14 @@ This should contain the all inconsequential merge conflicts into one file.
 ### Joe
 
 - Ball physics
+- Scoring
 
 ### Olly
 
 - Walls
+- Ball Physics
 
 ### Sam
 
 - Balls
+- Ball Physics
