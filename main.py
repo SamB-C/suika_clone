@@ -3,7 +3,7 @@ import pygame
 from constants import BALLS, WALL_WIDTH
 from typing import List
 from dict_types import BallRectType
-from ball_functions import reduce_speed, create_ball, get_distance_between_ball_centers, get_speed_magnitude, calculate_speed_after_collision
+from ball_functions import get_random_ball, reduce_speed, create_ball, get_distance_between_ball_centers, get_speed_magnitude, calculate_speed_after_collision
 from settings import fps
 from collisions import balls_colliding
 from ui import ScoreBoard
@@ -56,10 +56,10 @@ while True:
             mouse_x, _ = pygame.mouse.get_pos()
             x = mouse_x
             y = 0
-            speed = [randint(-1,1), 0]
+            speed = [randint(-1, 1), 0]
 
             # Sets type of ball
-            ball_num = 0
+            ball_num = get_random_ball()
             balls.append(create_ball(ball_num, x, y, speed))
 
             # Finds score associated with ball and adds to score

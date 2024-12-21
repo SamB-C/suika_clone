@@ -24,17 +24,20 @@ def calculate_speed_after_collision(ball1: BallRectType, ball2: BallRectType):
     ball2_center = ball2["ballrect"].center
 
     # Calculate the distance between the centers
-    distance = sqrt((ball2_center[0] - ball1_center[0]) ** 2 + (ball2_center[1] - ball1_center[1]) ** 2)
+    distance = sqrt((ball2_center[0] - ball1_center[0])
+                    ** 2 + (ball2_center[1] - ball1_center[1]) ** 2)
 
     # Avoid division by zero
     if distance == 0:
         return ball1["speed"], ball2["speed"]
 
     # Calculate the direction of the collision
-    direction = [(ball2_center[0] - ball1_center[0]) / distance, (ball2_center[1] - ball1_center[1]) / distance]
+    direction = [(ball2_center[0] - ball1_center[0]) / distance,
+                 (ball2_center[1] - ball1_center[1]) / distance]
 
     # Calculate the overlap
-    overlap = ball1["ball_constants"]["radius"] + ball2["ball_constants"]["radius"] - distance
+    overlap = ball1["ball_constants"]["radius"] + \
+        ball2["ball_constants"]["radius"] - distance
 
     # Adjust positions to prevent clipping
     ball1["ballrect"].x -= direction[0] * overlap / 2
@@ -81,3 +84,20 @@ def create_ball(ball_number, x, y, initial_speed):
     ball = BALLS[ball_number]
     ballrect = Rect(x, y, ball["radius"] * 2, ball["radius"] * 2)
     return {"ball_constants": ball, "ballrect": ballrect, "speed": initial_speed}
+
+
+def get_random_ball() -> int:
+    '''Returns a random ball number'''
+    n = randint(0, 100)
+    if n < 50:
+        return 0
+    elif n < 75:
+        return 1
+    elif n < 87:
+        return 2
+    elif n < 94:
+        return 3
+    elif n < 98:
+        return 4
+    else:
+        return 5
