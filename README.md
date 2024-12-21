@@ -1,4 +1,4 @@
-# suika_clone
+# Suika Clone
 
 A clone of suika game to make for fun with friends
 
@@ -17,3 +17,17 @@ The order of the balls from small to large are:
 9. Lemon Yellow 90
 10. Lime green 100
 11. Dark Green 110
+
+## Contributions
+
+### Joe
+
+- Ball physics
+
+### Olly
+
+- Walls
+
+### Sam
+
+- Balls
