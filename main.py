@@ -9,6 +9,7 @@ from collisions import balls_colliding, calculate_speed_after_collision, calcula
 from ui import ScoreBoard
 from ballmotion import close_to_floor, calc_speed, calc_friction, on_floor
 from random import randint
+from high_score import load_high_score, update_high_score
 
 pygame.init()
 
@@ -44,8 +45,12 @@ wallbottomrect = wallbottom.get_rect(bottomleft=(0, height))
 
 walls = [wallleftrect, wallrightrect, wallbottomrect]
 
+# Fetches high score from file
+high_score_value = load_high_score()
+
+# Creates score boards
 score_board = ScoreBoard()
-high_score = ScoreBoard(text="High score")
+high_score_board = ScoreBoard(text="High score", size=[150, 30], score=high_score_value)
 
 
 def add_ball():
@@ -143,7 +148,18 @@ def main_loop():
 
         pygame.draw.circle(screen, colour, ball["ballrect"].center, radius)
 
-    screen.blit(score_board.board, (10, 10))
+    # Gets current score
+    score = score_board.score
+
+    # Checks for new high score
+    if score > high_score_value:
+        high_score_value = score
+        update_high_score(score)
+        high_score_board.set_score(score)
+
+    # Updates score boards on screen
+    screen.blit(high_score_board.board, (10, 10))
+    screen.blit(score_board.board, (10, 50))
 
     # Updates the screen
     pygame.display.flip()
