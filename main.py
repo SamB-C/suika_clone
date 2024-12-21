@@ -48,38 +48,47 @@ score_board = ScoreBoard()
 high_score = ScoreBoard(text="High score")
 
 
-# Main loop
-def main_loop():
-    # Event Handler
+def add_ball():
+    '''Adds a ball to the screen and increases the score'''
+    mouse_x, _ = pygame.mouse.get_pos()
+    x = mouse_x
+    y = 0
+    speed = [randint(-1, 1), 0]
+
+    # Sets type of ball
+    ball_num = get_random_ball()
+    balls.append(create_ball(ball_num, x, y, speed))
+
+    # Finds score associated with ball and adds to score
+    score_to_add = BALLS[ball_num]["score"]
+    score_board.add_to_score(score_to_add)
+
+
+def event_handler():
+    '''Handles events such as quitting the game and adding balls'''
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
         if event.type == pygame.MOUSEBUTTONUP and event.button == 1:
-            mouse_x, _ = pygame.mouse.get_pos()
-            x = mouse_x
-            y = 0
-            speed = [randint(-1, 1), 0]
+            add_ball()
 
-            # Sets type of ball
-            ball_num = get_random_ball()
-            balls.append(create_ball(ball_num, x, y, speed))
 
-            # Finds score associated with ball and adds to score
-            score_to_add = BALLS[ball_num]["score"]
-            score_board.add_to_score(score_to_add)
-
-    # Fills the screen with black
+def draw_background(wallleft, wallleftrect, wallright, wallrightrect, wallbottom, wallbottomrect):
+    '''Fills in background as black and draws walls'''
     screen.fill(black)
-    # Draws the ball and walls
-
     screen.blit(wallleft, wallleftrect)
     screen.blit(wallright, wallrightrect)
     screen.blit(wallbottom, wallbottomrect)
 
+# Main loop
+
+
+def main_loop():
     # Event Handler
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            sys.exit()
+    event_handler()
+
+    draw_background(wallleft, wallleftrect, wallright,
+                    wallrightrect, wallbottom, wallbottomrect)
 
     # Moves the balls to next positions and renders them
     for ball in balls:
