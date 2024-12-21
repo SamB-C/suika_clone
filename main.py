@@ -26,7 +26,7 @@ gravity = 9.8
 
 #  Creates the balls
 balls: List[BallRectType] = []
-for i in range(20):
+for i in range(2):
     # Get coordinates of where to place top left corner of ball
     x, y = get_random_top_position(
         width, height, BALLS[0]["radius"])
