@@ -39,6 +39,8 @@ wallleftrect = wallleft.get_rect(topleft=(0, 0))
 wallrightrect = wallright.get_rect(topright=(width, 0))
 wallbottomrect = wallbottom.get_rect(bottomleft=(0, height))
 
+
+
 # Main loop
 while True:
     # Event Handler
