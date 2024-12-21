@@ -13,12 +13,4 @@ def calc_speed(speed, acceleration, fps, walls, ballrect):
     change = acceleration / fps
     new_speed = speed[1] + change
 
-    for wall in walls:
-        if ballrect.colliderect(wall):
-            if wall == walls[2]:
-                new_speed = -(new_speed)
-            else:
-                speed[0] = -(speed[0])
-
-    # Returns speed with acceleration applied
     return [speed[0], new_speed]

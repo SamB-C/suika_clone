@@ -73,10 +73,10 @@ while True:
 
         # Moves the ball
         ball["ballrect"] = ball["ballrect"].move(ball["speed"])
-        if ball["ballrect"].left < 0 or ball["ballrect"].right > width:
+        if ball["ballrect"].left < wallleftrect.right or ball["ballrect"].right > wallrightrect.left:
             ball["speed"][0] = -ball["speed"][0]
-        if ball["ballrect"].top < 0 or ball["ballrect"].bottom > height:
-            ball["speed"][1] = -ball["speed"][1]
+        if ball["ballrect"].top < 0 or ball["ballrect"].bottom > wallbottomrect.top:
+            ball["speed"][1] = -0.8 * ball["speed"][1]
 
         # Checks whether ball should be accelerated then accelerates ball
         if not close_to_floor(ball["ballrect"], wallbottomrect.top):
