@@ -59,7 +59,7 @@ while True:
 
             # Sets type of ball
             ball_num = 0
-            balls.append(create_ball(0, x, y, speed))
+            balls.append(create_ball(ball_num, x, y, speed))
 
             # Finds score associated with ball and adds to score
             score_to_add = BALLS[ball_num]["score"]
