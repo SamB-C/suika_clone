@@ -60,7 +60,7 @@ while True:
 
             # Sets type of ball
             ball_num = 0
-            balls.append(create_ball(0, x, y, speed))
+            balls.append(create_ball(ball_num, x, y, speed))
 
             # Finds score associated with ball and adds to score
             score_to_add = BALLS[ball_num]["score"]
@@ -104,9 +104,12 @@ while True:
                     if ball["ball_constants"]["radius"] == other_ball["ball_constants"]["radius"] and not ball["ball_constants"]["radius"] == BALLS[-1]["radius"]:
                         balls.pop(index)
                         ball_id = ball["ball_constants"]["id"]
+                        initial_radius = ball["ball_constants"]["radius"]
                         ball["ball_constants"] = BALLS[ball_id]
+                        final_radius = ball["ball_constants"]["radius"]
+                        size_increase = 2 * (final_radius - initial_radius)
                         ball["ballrect"] = ball["ballrect"].inflate(
-                            ball["ball_constants"]["radius"], ball["ball_constants"]["radius"])
+                            size_increase, size_increase)
                         score_board.add_to_score(BALLS[ball_id]["score"])
                     else:
                         ball["speed"], other_ball["speed"] = calculate_speed_after_collision(
