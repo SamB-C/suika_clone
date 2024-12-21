@@ -25,7 +25,7 @@ gravity = 9.8
 
 #  Creates the balls
 balls: List[BallRectType] = []
-for i in range(len(BALLS)):
+for i in range(1):
     balls.append(create_ball(i+1, width, height, speed))
 
 # Box
