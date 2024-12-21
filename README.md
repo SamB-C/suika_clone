@@ -2,6 +2,13 @@
 
 A clone of suika game to make for fun with friends
 
+## Things to do
+
+- Thing 1
+- Thing 2
+- Thing 3
+- Thing 4
+
 ## Ball Heiarachy
 
 The order of the balls from small to large are:
