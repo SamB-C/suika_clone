@@ -25,6 +25,13 @@ The order of the balls from small to large are:
 10. Lime green 100
 11. Dark Green 110
 
+## Settings
+
+Add values that you consistently change when debugging to the settings.py file.
+This file is exempt from git, so any changes to it aren't committed.
+
+This should reduce the number of merge conflicts, but bear in mind that your settings are therefore local and not shared to other developers, so may explain any discrepency in output.
+
 ## Contributions
 
 ### Joe

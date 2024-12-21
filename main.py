@@ -4,7 +4,7 @@ from constants import BALLS, WALL_WIDTH
 from typing import List
 from dict_types import BallRectType
 from ball_functions import create_ball, coordinates_of_ball_in_center_of_screen, get_random_top_position, get_random_speed, get_distance_between_ball_centers, get_speed_magnitude
-from math import sqrt
+from settings import balls_to_create, fps
 
 from ballmotion import close_to_floor, calc_speed, calc_friction, on_floor
 
@@ -20,15 +20,13 @@ screen = pygame.display.set_mode(size)
 
 # Creates game clock and sets target frames per second
 clock = pygame.time.Clock()
-fps = 60
 
 # Defines acceleration due to gravity
 gravity = 9.8
 
 #  Creates the balls
 balls: List[BallRectType] = []
-# balls_to_create = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
-balls_to_create = 20 * [1]
+# balls_to_create = 20 * [1]
 for i in balls_to_create:
     # Get coordinates of where to place top left corner of ball
     x, y = get_random_top_position(
