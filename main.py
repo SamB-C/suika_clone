@@ -3,9 +3,9 @@ import pygame
 from constants import BALLS, WALL_WIDTH
 from typing import List
 from dict_types import BallRectType
-from ball_functions import get_random_ball, reduce_speed, create_ball, get_distance_between_ball_centers, get_speed_magnitude, calculate_speed_after_collision
+from ball_functions import get_random_ball, reduce_speed, create_ball, get_distance_between_ball_centers, get_speed_magnitude
 from settings import fps
-from collisions import balls_colliding
+from collisions import balls_colliding, calculate_speed_after_collision, calculate_merge_speed
 from ui import ScoreBoard
 from ballmotion import close_to_floor, calc_speed, calc_friction, on_floor
 from random import randint
@@ -110,6 +110,7 @@ while True:
                         size_increase = 2 * (final_radius - initial_radius)
                         ball["ballrect"] = ball["ballrect"].inflate(
                             size_increase, size_increase)
+                        ball["speed"] = calculate_merge_speed(ball, other_ball)
                         score_board.add_to_score(BALLS[ball_id]["score"])
                     else:
                         ball["speed"], other_ball["speed"] = calculate_speed_after_collision(
