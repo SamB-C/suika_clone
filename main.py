@@ -51,7 +51,7 @@ high_score_value = load_high_score()
 # Creates score boards
 score_board = ScoreBoard()
 high_score_board = ScoreBoard(text="High score", size=[
-                              150, 30], score=high_score_value)
+                              170, 30], score=high_score_value)
 
 
 def add_ball():
