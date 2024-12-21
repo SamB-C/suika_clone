@@ -53,10 +53,12 @@ while True:
     if ballrect.left < 0 or ballrect.right > width:
         speed[0] = -speed[0]
     if ballrect.top < 0 or ballrect.bottom > height:
-        speed[1] = -speed[1]
+        speed[1] = -0.8 * speed[1]
 
-    # Accelerates ball
-    speed = ballmotion.calc_speed(speed, gravity, fps)
+
+    # Checks whether ball should be accelerated then accelerates ball
+    if not ballmotion.close_to_bottom(ballrect, wallbottomrect.top):
+        speed = ballmotion.calc_speed(speed, gravity, fps)
 
     # Fills the screen with black
     screen.fill(black)

@@ -1,12 +1,15 @@
+def close_to_bottom(ball, boundary):
+    # Calculates distance between ball and wall
+    difference = boundary - ball.bottom
+    print(difference, boundary)
+
+    # Checks if difference is small and returns boolean
+    return difference <= 1
+
 def calc_speed(speed, acceleration, fps):
-    new_speed = speed[0]
-
-    # Calculates change in speed per frame
+    # Calculates change in speed per frame then accelerates ball
     change = acceleration / fps
-
-    # Ensures ball won't fall through speed
-    if abs(new_speed) > change:
-        new_speed = speed[1] + change
+    new_speed = speed[1] + change
 
     # Returns speed with acceleration applied
     return [speed[0], new_speed]
