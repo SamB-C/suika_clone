@@ -89,6 +89,9 @@ def event_handler():
             passcount = 0
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -103,6 +106,7 @@ def draw_background(wallleft, wallleftrect, wallright, wallrightrect, wallbottom
     screen.blit(wallright, wallrightrect)
     screen.blit(wallbottom, wallbottomrect)
     screen.blit(walltop, walltoprect)
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 
@@ -188,6 +192,8 @@ def update_score():
 
 
 def main_loop():
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 =======
