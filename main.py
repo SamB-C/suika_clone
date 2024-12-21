@@ -1,8 +1,9 @@
 import sys
 import pygame
-from balls import BALLS, create_ball
+from balls import BALLS
 from typing import List
 from dict_types import BallRectType
+from ball_functions import create_ball, coordinates_of_ball_in_center_of_screen, get_random_top_position
 
 from ballmotion import close_to_floor, calc_speed
 
@@ -26,7 +27,9 @@ gravity = 9.8
 #  Creates the balls
 balls: List[BallRectType] = []
 for i in range(len(BALLS)):
-    balls.append(create_ball(i+1, width, height, speed))
+    x, y = get_random_top_position(
+        width, height, BALLS[i]["radius"])
+    balls.append(create_ball(i+1, x, y, speed))
 
 # Box
 wallleft = pygame.Surface((20, height))
