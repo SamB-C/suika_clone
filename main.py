@@ -90,6 +90,8 @@ def draw_background(wallleft, wallleftrect, wallright, wallrightrect, wallbottom
 
 
 def main_loop():
+    global high_score_value
+    
     # Event Handler
     event_handler()
 
