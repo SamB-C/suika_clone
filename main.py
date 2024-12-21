@@ -14,9 +14,23 @@ screen = pygame.display.set_mode(size)
 ball = pygame.image.load("intro_ball.gif")
 ballrect = ball.get_rect()
 
+# Box
+
+wallleft = pygame.surface.Surface(screen, (0, 0, 10, height))
+wallleft.fill((255, 255, 255))
+wallright = pygame.surface.Surface(screen, (width - 10, 0, 10, height))
+wallright.fill((255, 255, 255))
+wallbottom = pygame.surface.Surface(screen, (0, height - 10, width, 10))
+wallbottom.fill((255, 255, 255))
+
+wallleftrect = wallleft.get_rect()
+wallrightrect = wallright.get_rect()
+wallbottomrect = wallbottom.get_rect()
+
+
 # Main loop
 while True:
-    # Quit event
+    # Event Handler
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
@@ -32,5 +46,9 @@ while True:
     screen.fill(black)
     # Draws the ball
     screen.blit(ball, ballrect)
+    screen.blit(wallleft, wallleftrect)
+    screen.blit(wallright, wallrightrect)
+    screen.blit(wallbottom, wallbottomrect)
+
     # Updates the screen
     pygame.display.flip()
