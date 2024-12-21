@@ -1,5 +1,6 @@
 import sys
 import pygame
+from balls import BALLS
 pygame.init()
 
 # Sets width and height of the screen
@@ -11,7 +12,8 @@ black = 0, 0, 0
 screen = pygame.display.set_mode(size)
 
 # Loads the image
-radius = 20
+ball = BALLS[0]
+radius = ball["radius"]
 ballrect = pygame.Rect(width // 2 - radius, height //
                        2 - radius, radius * 2, radius * 2)
 
@@ -53,6 +55,6 @@ while True:
     screen.blit(wallright, wallrightrect)
     screen.blit(wallbottom, wallbottomrect)
 
-    pygame.draw.circle(screen, (255, 255, 255), ballrect.center, radius)
+    pygame.draw.circle(screen, ball["colour"], ballrect.center, radius)
     # Updates the screen
     pygame.display.flip()
