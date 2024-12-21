@@ -6,7 +6,7 @@ from dict_types import BallRectType
 from ball_functions import create_ball, coordinates_of_ball_in_center_of_screen, get_random_top_position, get_random_speed, get_distance_between_ball_centers, get_speed_magnitude
 from math import sqrt
 
-from ballmotion import close_to_floor, calc_speed
+from ballmotion import close_to_floor, calc_speed, calc_friction, on_floor
 
 pygame.init()
 
@@ -27,7 +27,7 @@ gravity = 9.8
 
 #  Creates the balls
 balls: List[BallRectType] = []
-for i in range(10):
+for i in range(2):
     # Get coordinates of where to place top left corner of ball
     x, y = get_random_top_position(
         width, height, BALLS[0]["radius"])
@@ -108,6 +108,9 @@ while True:
         if not close_to_floor(ball["ballrect"], wallbottomrect.top):
             ball["speed"] = calc_speed(
                 ball["speed"], gravity, fps, walls, ball["ballrect"])
+
+        if on_floor(ball["ballrect"].bottom, wallbottomrect.top):
+            ball["speed"] = calc_friction(ball["speed"])
 
         pygame.draw.circle(
             screen, colour, ball["ballrect"].center, radius)
