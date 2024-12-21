@@ -70,6 +70,11 @@ def calculate_speed_after_collision(ball1: BallRectType, ball2: BallRectType):
     return new_speed1, new_speed2
 
 
+def reduce_speed(speed: list[int]) -> list[int]:
+    '''Reduces the speed of the ball by 1 in the x and y direction'''
+    return [0.8 * speed[0], 0.8 * speed[1]]
+
+
 def create_ball(ball_number, x, y, initial_speed):
     '''Creates a ball (using data from the given ball number) and returns a dictionary containing the ball's constants, the ball's rectangle and the ball's speed'''
     ball = BALLS[ball_number - 1]
