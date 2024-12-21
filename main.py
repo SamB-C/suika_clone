@@ -3,7 +3,7 @@ import pygame
 from constants import BALLS, WALL_WIDTH
 from typing import List
 from dict_types import BallRectType
-from ball_functions import calculate_merge_speed, reduce_speed, create_ball, get_random_speed, get_distance_between_ball_centers, get_speed_magnitude, calculate_speed_after_collision
+from ball_functions import reduce_speed, create_ball, get_random_speed, get_distance_between_ball_centers, get_speed_magnitude, calculate_speed_after_collision
 from settings import fps
 from collisions import balls_colliding
 from ui import ScoreBoard
@@ -56,7 +56,14 @@ while True:
             x = mouse_x
             y = 0
             speed = get_random_speed()
+
+            # Sets type of ball
+            ball_num = 0
             balls.append(create_ball(0, x, y, speed))
+
+            # Finds score associated with ball and adds to score
+            score_to_add = BALLS[ball_num]["score"]
+            score_board.add_to_score(score_to_add)
 
     # Fills the screen with black
     screen.fill(black)
@@ -95,13 +102,14 @@ while True:
                 if balls_colliding(ball, other_ball):
                     if ball["ball_constants"]["radius"] == other_ball["ball_constants"]["radius"] and not ball["ball_constants"]["radius"] == BALLS[-1]["radius"]:
                         balls.pop(index)
+                        ball_id = ball["ball_constants"]["id"]
                         initial_radius = ball["ball_constants"]["radius"]
-                        ball["ball_constants"] = BALLS[ball["ball_constants"]["id"]]
+                        ball["ball_constants"] = BALLS[ball_id]
                         final_radius = ball["ball_constants"]["radius"]
                         size_increase = 2 * (final_radius - initial_radius)
                         ball["ballrect"] = ball["ballrect"].inflate(
                             size_increase, size_increase)
-                        ball["speed"] = calculate_merge_speed(ball, other_ball)
+                        score_board.add_to_score(BALLS[ball_id]["score"])
                     else:
                         ball["speed"], other_ball["speed"] = calculate_speed_after_collision(
                             ball, other_ball)
@@ -129,7 +137,6 @@ while True:
         pygame.draw.circle(screen, colour, ball["ballrect"].center, radius)
 
     screen.blit(score_board.board, (10, 10))
-    score_board.add_to_score(1)
 
     # Updates the screen
     pygame.display.flip()
