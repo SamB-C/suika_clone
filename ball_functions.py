@@ -5,11 +5,6 @@ from dict_types import BallRectType
 from math import sqrt
 
 
-def coordinates_of_ball_in_center_of_screen(screen_width, screen_height, ball_radius):
-    '''Returns the x and y coordinates of a ball in the center of the screen'''
-    return screen_width // 2 - ball_radius, screen_height // 2 - ball_radius
-
-
 def get_distance_between_ball_centers(ball1: BallRectType, ball2: BallRectType):
     ball1_center = ball1["ballrect"].center
     ball2_center = ball2["ballrect"].center

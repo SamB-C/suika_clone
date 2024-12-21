@@ -3,7 +3,7 @@ import pygame
 from constants import BALLS, WALL_WIDTH
 from typing import List
 from dict_types import BallRectType
-from ball_functions import reduce_speed, create_ball, coordinates_of_ball_in_center_of_screen, get_random_speed, get_distance_between_ball_centers, get_speed_magnitude, calculate_speed_after_collision
+from ball_functions import reduce_speed, create_ball, get_random_speed, get_distance_between_ball_centers, get_speed_magnitude, calculate_speed_after_collision
 from settings import fps
 from collisions import balls_colliding
 from ui import ScoreBoard
