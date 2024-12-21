@@ -45,6 +45,7 @@ wallbottomrect = wallbottom.get_rect(bottomleft=(0, height))
 walls = [wallleftrect, wallrightrect, wallbottomrect]
 
 score_board = ScoreBoard()
+high_score = ScoreBoard(text="High score")
 
 # Main loop
 while True:
@@ -52,7 +53,7 @@ while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
-        if event.type == pygame.MOUSEBUTTONUP:
+        if event.type == pygame.MOUSEBUTTONUP and event.button == 1:
             mouse_x, _ = pygame.mouse.get_pos()
             x = mouse_x
             y = 0
