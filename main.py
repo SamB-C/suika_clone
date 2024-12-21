@@ -5,7 +5,7 @@ from typing import List
 from dict_types import BallRectType
 from ball_functions import create_ball, coordinates_of_ball_in_center_of_screen, get_random_top_position, get_random_speed
 
-from ballmotion import close_to_floor, calc_speed
+from ballmotion import close_to_floor, calc_speed, calc_friction, on_floor
 
 pygame.init()
 
@@ -99,6 +99,9 @@ while True:
         if not close_to_floor(ball["ballrect"], wallbottomrect.top):
             ball["speed"] = calc_speed(
                 ball["speed"], gravity, fps, walls, ball["ballrect"])
+
+        if on_floor(ball["ballrect"].bottom, wallbottomrect.top):
+            ball["speed"] = calc_friction(ball["speed"])
 
         pygame.draw.circle(
             screen, colour, ball["ballrect"].center, radius)
