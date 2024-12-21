@@ -14,3 +14,4 @@ class BallRectType(TypedDict):
     ball_constants: BallType
     ballrect: Rect
     speed: list
+    pass_count: int
