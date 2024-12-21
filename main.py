@@ -95,9 +95,12 @@ while True:
                 if balls_colliding(ball, other_ball):
                     if ball["ball_constants"]["radius"] == other_ball["ball_constants"]["radius"] and not ball["ball_constants"]["radius"] == BALLS[-1]["radius"]:
                         balls.pop(index)
+                        initial_radius = ball["ball_constants"]["radius"]
                         ball["ball_constants"] = BALLS[ball["ball_constants"]["id"]]
+                        final_radius = ball["ball_constants"]["radius"]
+                        size_increase = 2 * (final_radius - initial_radius)
                         ball["ballrect"] = ball["ballrect"].inflate(
-                            ball["ball_constants"]["radius"], ball["ball_constants"]["radius"])
+                            size_increase, size_increase)
                         ball["speed"] = calculate_merge_speed(ball, other_ball)
                     else:
                         ball["speed"], other_ball["speed"] = calculate_speed_after_collision(
