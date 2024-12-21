@@ -10,13 +10,6 @@ def coordinates_of_ball_in_center_of_screen(screen_width, screen_height, ball_ra
     return screen_width // 2 - ball_radius, screen_height // 2 - ball_radius
 
 
-def get_random_top_position(screen_width, screen_height, ball_radius):
-    '''Returns the x and y coordinates of a ball at the top of the screen'''
-    margin = ball_radius + WALL_WIDTH + 5
-    x = margin + randint(0, screen_width - (2 * (margin)))
-    return x, 0
-
-
 def get_distance_between_ball_centers(ball1: BallRectType, ball2: BallRectType):
     ball1_center = ball1["ballrect"].center
     ball2_center = ball2["ballrect"].center
