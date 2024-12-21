@@ -5,11 +5,6 @@ from dict_types import BallRectType
 from math import sqrt
 
 
-def coordinates_of_ball_in_center_of_screen(screen_width, screen_height, ball_radius):
-    '''Returns the x and y coordinates of a ball in the center of the screen'''
-    return screen_width // 2 - ball_radius, screen_height // 2 - ball_radius
-
-
 def get_distance_between_ball_centers(ball1: BallRectType, ball2: BallRectType):
     ball1_center = ball1["ballrect"].center
     ball2_center = ball2["ballrect"].center
@@ -60,6 +55,26 @@ def calculate_speed_after_collision(ball1: BallRectType, ball2: BallRectType):
     new_speed2 = [speed2[0] + direction[0], speed2[1] + direction[1]]
 
     return new_speed1, new_speed2
+
+
+def calculate_merge_speed(ball1: BallRectType, ball2: BallRectType):
+    ball1_speed = ball1["speed"]
+    ball2_speed = ball2["speed"]
+
+    ball1_mass = ball1["ball_constants"]["radius"]
+    ball2_mass = ball2["ball_constants"]["radius"]
+
+    ball1_momentum = [ball1_speed[0] * ball1_mass, ball1_speed[1] * ball1_mass]
+    ball2_momentum = [ball2_speed[0] * ball2_mass, ball2_speed[1] * ball2_mass]
+
+    total_momentum = [ball1_momentum[0] + ball2_momentum[0],
+                      ball1_momentum[1] + ball2_momentum[1]]
+    total_mass = ball1_mass + ball2_mass
+    final_speed = [total_momentum[0] / total_mass,
+                   total_momentum[1] / total_mass]
+
+    return final_speed
+
 
 def reduce_speed(speed: list[int]) -> list[int]:
     '''Reduces the speed of the ball by 1 in the x and y direction'''
