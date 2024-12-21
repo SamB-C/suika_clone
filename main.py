@@ -88,22 +88,29 @@ while True:
             ball["speed"][1] = -0.8 * ball["speed"][1]
 
         # Ball collisions wuth other balls
-        for other_ball in balls:
+        for index, other_ball in enumerate(balls):
             if other_ball != ball:
                 if ball["ballrect"].colliderect(other_ball["ballrect"]):
-                    ball["speed"], other_ball["speed"] = calculate_speed_after_collision(
-                        ball, other_ball)
-                    ball["speed"] = reduce_speed(ball["speed"])
-                    other_ball["speed"] = reduce_speed(other_ball["speed"])
-                    # Get distance between ball centers
-                    diff_centres = get_distance_between_ball_centers(
-                        ball, other_ball)
-                    # Get speed of other ball
-                    other_ball_speed = get_speed_magnitude(ball["speed"])
-                    # If the balls are too close, move them apart
-                    if other_ball_speed < 2 * diff_centres:
-                        other_ball["ballrect"] = other_ball["ballrect"].move(
-                            other_ball["speed"][0] * 2, other_ball["speed"][1] * 2)
+                    if ball["ball_constants"]["radius"] == other_ball["ball_constants"]["radius"] and not ball["ball_constants"]["radius"] == BALLS[-1]["radius"]:
+                        balls.pop(index)
+                        ball["ball_constants"] = BALLS[ball["ball_constants"]["id"]]
+                        ball["ballrect"] = ball["ballrect"].inflate(
+                            ball["ball_constants"]["radius"], ball["ball_constants"]["radius"])
+                    else:
+                        ball["speed"], other_ball["speed"] = calculate_speed_after_collision(
+                            ball, other_ball)
+                        #  Reduce the speed of the balls after a collision
+                        ball["speed"] = reduce_speed(ball["speed"])
+                        other_ball["speed"] = reduce_speed(other_ball["speed"])
+                        # Get distance between ball centers
+                        diff_centres = get_distance_between_ball_centers(
+                            ball, other_ball)
+                        # Get speed of other ball
+                        other_ball_speed = get_speed_magnitude(ball["speed"])
+                        # If the balls are too close, move them apart
+                        if other_ball_speed < 2 * diff_centres:
+                            other_ball["ballrect"] = other_ball["ballrect"].move(
+                                other_ball["speed"][0] * 2, other_ball["speed"][1] * 2)
 
         # Checks whether ball should be accelerated then accelerates ball
         if not close_to_floor(ball["ballrect"], wallbottomrect.top):
