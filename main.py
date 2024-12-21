@@ -46,8 +46,9 @@ walls = [wallleftrect, wallrightrect, wallbottomrect]
 
 score_board = ScoreBoard()
 
+
 # Main loop
-while True:
+def main_loop():
     # Event Handler
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -144,3 +145,7 @@ while True:
     pygame.display.flip()
     # Waits for next frame
     clock.tick(fps)
+
+
+while True:
+    main_loop()
