@@ -8,6 +8,7 @@ class BallType(TypedDict):
 
 
 class BallRectType(TypedDict):
+    id: int
     ball_constants: BallType
     ballrect: Rect
     speed: list
