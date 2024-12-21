@@ -5,6 +5,7 @@ from typing import List
 from dict_types import BallRectType
 from ball_functions import reduce_speed, create_ball, coordinates_of_ball_in_center_of_screen, get_random_speed, get_distance_between_ball_centers, get_speed_magnitude, calculate_speed_after_collision
 from settings import fps
+from collisions import balls_colliding
 
 from ballmotion import close_to_floor, calc_speed, calc_friction, on_floor
 
@@ -90,7 +91,7 @@ while True:
         # Ball collisions wuth other balls
         for index, other_ball in enumerate(balls):
             if other_ball != ball:
-                if ball["ballrect"].colliderect(other_ball["ballrect"]):
+                if balls_colliding(ball, other_ball):
                     if ball["ball_constants"]["radius"] == other_ball["ball_constants"]["radius"] and not ball["ball_constants"]["radius"] == BALLS[-1]["radius"]:
                         balls.pop(index)
                         ball["ball_constants"] = BALLS[ball["ball_constants"]["id"]]
