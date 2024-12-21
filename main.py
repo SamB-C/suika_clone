@@ -4,8 +4,7 @@ from constants import BALLS, WALL_WIDTH
 from typing import List
 from dict_types import BallRectType
 from ball_functions import reduce_speed, create_ball, coordinates_of_ball_in_center_of_screen, get_random_top_position, get_random_speed, get_distance_between_ball_centers, get_speed_magnitude, calculate_speed_after_collision
-from settings import balls_to_create, fps
-from collisions import check_wall_collision
+from settings import fps
 
 from ballmotion import close_to_floor, calc_speed, calc_friction, on_floor
 
@@ -113,6 +112,8 @@ while True:
 
         if on_floor(ball["ballrect"].bottom, wallbottomrect.top):
             ball["speed"] = calc_friction(ball["speed"])
+
+        pygame.draw.circle(screen, colour, ball["ballrect"].center, radius)
 
     # Updates the screen
     pygame.display.flip()
