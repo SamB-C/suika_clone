@@ -2,7 +2,7 @@ import sys
 import pygame
 from balls import BALLS
 
-import ballmotion
+from ballmotion import close_to_floor, calc_speed
 
 pygame.init()
 
@@ -55,12 +55,12 @@ while True:
     if ballrect.left < 0 or ballrect.right > width:
         speed[0] = -speed[0]
     if ballrect.top < 0 or ballrect.bottom > height:
-        speed[1] = -0.8 * speed[1]
+        speed[1] = -0.9 * speed[1]
 
 
     # Checks whether ball should be accelerated then accelerates ball
-    if not ballmotion.close_to_bottom(ballrect, wallbottomrect.top):
-        speed = ballmotion.calc_speed(speed, gravity, fps)
+    if not close_to_floor(ballrect, wallbottomrect.top):
+        speed = calc_speed(speed, gravity, fps)
 
     # Fills the screen with black
     screen.fill(black)

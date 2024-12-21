@@ -1,7 +1,6 @@
-def close_to_bottom(ball, boundary):
+def close_to_floor(ball, boundary):
     # Calculates distance between ball and wall
     difference = boundary - ball.bottom
-    print(difference, boundary)
 
     # Checks if difference is small and returns boolean
     return difference <= 1
