@@ -4,7 +4,7 @@ from balls import BALLS, create_ball
 from typing import List
 from dict_types import BallRectType
 
-import ballmotion
+from ballmotion import close_to_floor, calc_speed
 
 pygame.init()
 
@@ -29,16 +29,18 @@ for i in range(len(BALLS)):
     balls.append(create_ball(i+1, width, height, speed))
 
 # Box
-wallleft = pygame.Surface((10, height))
+wallleft = pygame.Surface((20, height))
 wallleft.fill((255, 255, 255))
-wallright = pygame.Surface((10, height))
+wallright = pygame.Surface((20, height))
 wallright.fill((255, 255, 255))
-wallbottom = pygame.Surface((width, 10))
+wallbottom = pygame.Surface((width, 20))
 wallbottom.fill((255, 255, 255))
 
 wallleftrect = wallleft.get_rect(topleft=(0, 0))
 wallrightrect = wallright.get_rect(topright=(width, 0))
 wallbottomrect = wallbottom.get_rect(bottomleft=(0, height))
+
+walls = [wallleftrect, wallrightrect, wallbottomrect]
 
 
 # Main loop
