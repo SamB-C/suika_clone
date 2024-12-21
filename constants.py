@@ -1,4 +1,3 @@
-from typing import List
 from dict_types import BallType
 
 WALL_WIDTH = 20
@@ -72,7 +71,7 @@ DARK_GREEN11: BallType = {
 }
 
 
-BALLS: List[BallType] = [
+BALLS: list[BallType] = [
     DARK_RED1,
     LIGHT_RED2,
     PURPLE3,

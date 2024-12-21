@@ -134,6 +134,7 @@ while True:
         pygame.draw.circle(screen, colour, ball["ballrect"].center, radius)
 
     screen.blit(score_board.board, (10, 10))
+    score_board.add_to_score(1)
 
     # Updates the screen
     pygame.display.flip()
