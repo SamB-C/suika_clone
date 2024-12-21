@@ -6,7 +6,7 @@ from dict_types import BallRectType
 from ball_functions import reduce_speed, create_ball, coordinates_of_ball_in_center_of_screen, get_random_speed, get_distance_between_ball_centers, get_speed_magnitude, calculate_speed_after_collision
 from settings import fps
 from collisions import balls_colliding
-
+from ui import ScoreBoard
 from ballmotion import close_to_floor, calc_speed, calc_friction, on_floor
 
 pygame.init()
@@ -43,6 +43,7 @@ wallbottomrect = wallbottom.get_rect(bottomleft=(0, height))
 
 walls = [wallleftrect, wallrightrect, wallbottomrect]
 
+score_board = ScoreBoard()
 
 # Main loop
 while True:
@@ -122,6 +123,9 @@ while True:
             ball["speed"] = calc_friction(ball["speed"])
 
         pygame.draw.circle(screen, colour, ball["ballrect"].center, radius)
+
+    screen.blit(score_board.board, (10, 10))
+    score_board.add_to_score(1)
 
     # Updates the screen
     pygame.display.flip()
