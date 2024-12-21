@@ -74,12 +74,20 @@ while True:
         colour = ball["ball_constants"]["colour"]
         radius = ball["ball_constants"]["radius"]
 
-        # Moves the ball
+        # Checks collisions
         ball["ballrect"] = ball["ballrect"].move(ball["speed"])
         if ball["ballrect"].left < wallleftrect.right or ball["ballrect"].right > wallrightrect.left:
             ball["speed"][0] = -ball["speed"][0]
         if ball["ballrect"].top < 0 or ball["ballrect"].bottom > wallbottomrect.top:
             ball["speed"][1] = -0.8 * ball["speed"][1]
+
+        # Snaps after collision
+        if ball["ballrect"].left < wallleftrect.right:
+            ball["ballrect"].left = wallleftrect.right
+        if ball["ballrect"].right > wallrightrect.left:
+            ball["ballrect"].right = wallrightrect.left
+        if ball["ballrect"].bottom > wallbottomrect.top:
+            ball["ballrect"].bottom = wallbottomrect.top
 
         # Checks whether ball should be accelerated then accelerates ball
         if not close_to_floor(ball["ballrect"], wallbottomrect.top):
