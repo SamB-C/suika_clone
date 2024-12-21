@@ -17,11 +17,6 @@ def get_speed_magnitude(speed):
     return sqrt(speed[0] ** 2 + speed[1] ** 2)
 
 
-def get_random_speed():
-    '''Returns a random speed for the ball'''
-    return [randint(-5, 5), randint(0, 5)]
-
-
 def calculate_speed_after_collision(ball1: BallRectType, ball2: BallRectType):
     '''Calculates the speed of the balls after a collision and adjusts their positions to prevent clipping'''
     # Get the centers of the balls
