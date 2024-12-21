@@ -3,7 +3,8 @@ import pygame
 from constants import BALLS, WALL_WIDTH
 from typing import List
 from dict_types import BallRectType
-from ball_functions import create_ball, coordinates_of_ball_in_center_of_screen, get_random_top_position, get_random_speed
+from ball_functions import create_ball, coordinates_of_ball_in_center_of_screen, get_random_top_position, get_random_speed, get_distance_between_ball_centers, get_speed_magnitude
+from math import sqrt
 
 from ballmotion import close_to_floor, calc_speed
 
@@ -26,7 +27,7 @@ gravity = 9.8
 
 #  Creates the balls
 balls: List[BallRectType] = []
-for i in range(20):
+for i in range(10):
     # Get coordinates of where to place top left corner of ball
     x, y = get_random_top_position(
         width, height, BALLS[0]["radius"])
@@ -94,6 +95,14 @@ while True:
                 if ball["ballrect"].colliderect(other_ball["ballrect"]):
                     ball["speed"][0] = -ball["speed"][0]
                     ball["speed"][1] = -ball["speed"][1]
+                    # Get distance between ball centers
+                    diff = get_distance_between_ball_centers(ball, other_ball)
+                    # Get speed of other ball
+                    other_ball_speed = get_speed_magnitude(ball["speed"])
+                    # If the balls are too close, move them apart
+                    if other_ball_speed < 1.2 * diff:
+                        other_ball["ballrect"] = other_ball["ballrect"].move(
+                            other_ball["speed"][0] * 2, other_ball["speed"][1] * 2)
 
         # Checks whether ball should be accelerated then accelerates ball
         if not close_to_floor(ball["ballrect"], wallbottomrect.top):

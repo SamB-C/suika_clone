@@ -1,6 +1,8 @@
 from constants import BALLS, WALL_WIDTH
 from pygame import Rect
 from random import randint
+from dict_types import BallRectType
+from math import sqrt
 
 
 def coordinates_of_ball_in_center_of_screen(screen_width, screen_height, ball_radius):
@@ -13,6 +15,18 @@ def get_random_top_position(screen_width, screen_height, ball_radius):
     margin = ball_radius + WALL_WIDTH + 5
     x = margin + randint(0, screen_width - (2 * (margin)))
     return x, 0
+
+
+def get_distance_between_ball_centers(ball1: BallRectType, ball2: BallRectType):
+    ball1_center = ball1["ballrect"].center
+    ball2_center = ball2["ballrect"].center
+    return sqrt((ball1_center[0] - ball2_center[0]) **
+                2 + (ball1_center[1] - ball2_center[1]) ** 2)
+
+
+def get_speed_magnitude(speed):
+    '''Returns the magnitude of the speed vector'''
+    return sqrt(speed[0] ** 2 + speed[1] ** 2)
 
 
 def get_random_speed():
