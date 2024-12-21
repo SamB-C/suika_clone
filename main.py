@@ -27,14 +27,7 @@ gravity = 9.8
 
 #  Creates the balls
 balls: List[BallRectType] = []
-# balls_to_create = 20 * [1]
-for i in balls_to_create:
-    # Get coordinates of where to place top left corner of ball
-    x, y = get_random_top_position(
-        width, height, BALLS[i-1]["radius"])
-    speed = get_random_speed()
-    # Create ball and add to the list of balls
-    balls.append(create_ball(i, x, y, speed))
+
 
 # Box
 wallleft = pygame.Surface((WALL_WIDTH, height))
@@ -57,6 +50,12 @@ while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
+        if event.type == pygame.MOUSEBUTTONUP:
+            x, y = get_random_top_position(
+                width, height, BALLS[0]["radius"])
+            speed = get_random_speed()
+            # Create ball and add to the list of balls
+            balls.append(create_ball(0, x, y, speed))
 
     # Fills the screen with black
     screen.fill(black)
@@ -114,9 +113,6 @@ while True:
 
         if on_floor(ball["ballrect"].bottom, wallbottomrect.top):
             ball["speed"] = calc_friction(ball["speed"])
-
-        pygame.draw.circle(
-            screen, colour, ball["ballrect"].center, radius)
 
     # Updates the screen
     pygame.display.flip()

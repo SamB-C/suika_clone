@@ -2,5 +2,5 @@
 
 # If there is a merge conflict in this file, whichever way you resolve it should be irrelevant.
 
-balls_to_create = 5 * [4]
+
 fps = 60
