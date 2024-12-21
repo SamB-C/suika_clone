@@ -87,6 +87,9 @@ def event_handler():
             y = 0
             speed = [randint(-1, 1), 0]
             passcount = 0
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
 
@@ -97,6 +100,7 @@ def draw_background(wallleft, wallleftrect, wallright, wallrightrect, wallbottom
     screen.blit(wallright, wallrightrect)
     screen.blit(wallbottom, wallbottomrect)
     screen.blit(walltop, walltoprect)
+<<<<<<< Updated upstream
 
 
 def collide_balls(ball: BallRectType, other_ball: BallRectType, collisions: list[list[int]]):
@@ -180,6 +184,8 @@ def update_score():
 
 
 def main_loop():
+=======
+>>>>>>> Stashed changes
 
     # Event Handler
     event_handler()

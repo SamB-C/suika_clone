@@ -32,7 +32,11 @@ def create_ball(ball_number, x, y, initial_speed):
     ball = BALLS[ball_number]
     ballrect = Rect(x, y, ball["radius"] * 2, ball["radius"] * 2)
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     return {"id": ball_id, "ball_constants": ball, "ballrect": ballrect, "speed": initial_speed}
+=======
+    return {"ball_constants": ball, "ballrect": ballrect, "speed": initial_speed, "pass_count": 0}
+>>>>>>> Stashed changes
 =======
     return {"ball_constants": ball, "ballrect": ballrect, "speed": initial_speed, "pass_count": 0}
 >>>>>>> Stashed changes
