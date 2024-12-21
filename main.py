@@ -65,7 +65,7 @@ while True:
 
     # Checks whether ball should be accelerated then accelerates ball
     if not close_to_floor(ballrect, wallbottomrect.top):
-        speed = calc_speed(speed, gravity, fps)
+        speed = calc_speed(speed, gravity, fps, walls, ballrect)
 
     # Fills the screen with black
     screen.fill(black)
@@ -92,7 +92,7 @@ while True:
             ball["speed"][1] = -ball["speed"][1]
 
         # Accelerates ball
-        ball["speed"] = ballmotion.calc_speed(ball["speed"], gravity, fps)
+        ball["speed"] = calc_speed(ball["speed"], gravity, fps, walls, ballrect)
 
         pygame.draw.circle(
             screen, colour, ball["ballrect"].center, radius)
