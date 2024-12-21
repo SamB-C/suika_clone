@@ -4,10 +4,6 @@ from math import sqrt
 from pygame import Rect
 
 
-def check_ball_collisions(current_ball: BallRectType, balls: list[BallRectType]):
-    pass
-
-
 def check_wall_collisions(ball: BallRectType, wallleftrect: Rect, wallrightrect: Rect, wallbottomrect: Rect):
     '''Checks for collisions between the ball and the walls'''
     if ball["ballrect"].left < wallleftrect.right:
