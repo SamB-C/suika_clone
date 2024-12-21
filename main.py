@@ -79,21 +79,12 @@ def event_handler():
         if event.type == pygame.QUIT:
             sys.exit()
         if event.type == pygame.MOUSEBUTTONUP and event.button == 1:
-<<<<<<< Updated upstream
             add_ball()
-=======
             mouse_x, _ = pygame.mouse.get_pos()
             x = mouse_x
             y = 0
             speed = [randint(-1, 1), 0]
             passcount = 0
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 
 
 def draw_background(wallleft, wallleftrect, wallright, wallrightrect, wallbottom, wallbottomrect):
@@ -103,8 +94,6 @@ def draw_background(wallleft, wallleftrect, wallright, wallrightrect, wallbottom
     screen.blit(wallright, wallrightrect)
     screen.blit(wallbottom, wallbottomrect)
     screen.blit(walltop, walltoprect)
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 
 
 def collide_balls(ball: BallRectType, other_ball: BallRectType, collisions: list[list[int]]):
@@ -188,10 +177,6 @@ def update_score():
 
 
 def main_loop():
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 
     # Event Handler
     event_handler()
@@ -209,67 +194,7 @@ def main_loop():
         pygame.draw.circle(screen, ball["ball_constants"]["colour"],
                            ball["ballrect"].center, ball["ball_constants"]["radius"])
 
-<<<<<<< Updated upstream
     update_score()
-=======
-        if ball["ballrect"].left < wallleftrect.right:
-            ball["ballrect"].left = wallleftrect.right
-            ball["speed"][0] = -ball["speed"][0]
-        if ball["ballrect"].right > wallrightrect.left:
-            ball["ballrect"].right = wallrightrect.left
-            ball["speed"][0] = -ball["speed"][0]
-        if ball["ballrect"].bottom > wallbottomrect.top:
-            ball["ballrect"].bottom = wallbottomrect.top
-            ball["speed"][1] = -0.8 * ball["speed"][1]
-        if ball["ballrect"].top < walltoprect.bottom:
-            ball["pass_count"] += 1
-            if ball["pass_count"] > 1:
-                print("Game Over")
-                sys.exit()
-
-        # Ball collisions wuth other balls
-        for index, other_ball in enumerate(balls):
-            if other_ball != ball:
-                if balls_colliding(ball, other_ball):
-                    if ball["ball_constants"]["radius"] == other_ball["ball_constants"]["radius"] and not ball["ball_constants"]["radius"] == BALLS[-1]["radius"]:
-                        balls.pop(index)
-                        ball_id = ball["ball_constants"]["id"]
-                        initial_radius = ball["ball_constants"]["radius"]
-                        ball["ball_constants"] = BALLS[ball_id]
-                        final_radius = ball["ball_constants"]["radius"]
-                        size_increase = 2 * (final_radius - initial_radius)
-                        ball["ballrect"] = ball["ballrect"].inflate(
-                            size_increase, size_increase)
-                        ball["speed"] = calculate_merge_speed(ball, other_ball)
-                        score_board.add_to_score(BALLS[ball_id]["score"])
-                    else:
-                        ball["speed"], other_ball["speed"] = calculate_speed_after_collision(
-                            ball, other_ball)
-                        #  Reduce the speed of the balls after a collision
-                        ball["speed"] = reduce_speed(ball["speed"])
-                        other_ball["speed"] = reduce_speed(other_ball["speed"])
-                        # Get distance between ball centers
-                        diff_centres = get_distance_between_ball_centers(
-                            ball, other_ball)
-                        # Get speed of other ball
-                        other_ball_speed = get_speed_magnitude(ball["speed"])
-                        # If the balls are too close, move them apart
-                        if other_ball_speed < 2 * diff_centres:
-                            other_ball["ballrect"] = other_ball["ballrect"].move(
-                                other_ball["speed"][0] * 2, other_ball["speed"][1] * 2)
-
-        # Checks whether ball should be accelerated then accelerates ball
-        if not close_to_floor(ball["ballrect"], wallbottomrect.top):
-            ball["speed"] = calc_speed(
-                ball["speed"], gravity, fps, walls, ball["ballrect"])
-
-        if on_floor(ball["ballrect"].bottom, wallbottomrect.top):
-            ball["speed"] = calc_friction(ball["speed"])
-
-        pygame.draw.circle(screen, colour, ball["ballrect"].center, radius)
-
-    screen.blit(score_board.board, (10, 10))
->>>>>>> Stashed changes
 
     # Updates the screen
     pygame.display.flip()
