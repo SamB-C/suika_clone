@@ -77,6 +77,6 @@ def reduce_speed(speed: list[int]) -> list[int]:
 
 def create_ball(ball_number, x, y, initial_speed):
     '''Creates a ball (using data from the given ball number) and returns a dictionary containing the ball's constants, the ball's rectangle and the ball's speed'''
-    ball = BALLS[ball_number - 1]
+    ball = BALLS[ball_number]
     ballrect = Rect(x, y, ball["radius"] * 2, ball["radius"] * 2)
     return {"ball_constants": ball, "ballrect": ballrect, "speed": initial_speed}
