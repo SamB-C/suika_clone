@@ -1,6 +1,8 @@
 import sys
 import pygame
 from balls import BALLS
+from typing import List
+from dict_types import BallRectType
 
 import ballmotion
 
@@ -21,11 +23,13 @@ fps = 60
 # Defines acceleration due to gravity
 gravity = 9.8
 
-# Loads the image
-ball = BALLS[0]
-radius = ball["radius"]
-ballrect = pygame.Rect(width // 2 - radius, height //
-                       2 - radius, radius * 2, radius * 2)
+#  Creates the balls
+balls: List[BallRectType] = []
+for ball in BALLS:
+    ballrect = pygame.Rect(width // 2 - ball["radius"], height //
+                           2 - ball["radius"], ball["radius"] * 2, ball["radius"] * 2)
+    balls.append(
+        {"ball_constants": ball, "ballrect": ballrect, "speed": speed})
 
 # Box
 wallleft = pygame.Surface((10, height))
@@ -41,23 +45,6 @@ wallbottomrect = wallbottom.get_rect(bottomleft=(0, height))
 
 # Main loop
 while True:
-    # Event Handler
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            sys.exit()
-
-
-
-    # Moves the ball
-    ballrect = ballrect.move(speed)
-    if ballrect.left < 0 or ballrect.right > width:
-        speed[0] = -speed[0]
-    if ballrect.top < 0 or ballrect.bottom > height:
-        speed[1] = -speed[1]
-
-    # Accelerates ball
-    speed = ballmotion.calc_speed(speed, gravity, fps)
-
     # Fills the screen with black
     screen.fill(black)
     # Draws the ball and walls
@@ -66,7 +53,27 @@ while True:
     screen.blit(wallright, wallrightrect)
     screen.blit(wallbottom, wallbottomrect)
 
-    pygame.draw.circle(screen, ball["colour"], ballrect.center, radius)
+    # Event Handler
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            sys.exit()
+
+    for ball in balls:
+        colour = ball["ball_constants"]["colour"]
+        radius = ball["ball_constants"]["radius"]
+
+        # Moves the ball
+        ball["ballrect"] = ball["ballrect"].move(ball["speed"])
+        if ball["ballrect"].left < 0 or ball["ballrect"].right > width:
+            ball["speed"][0] = -ball["speed"][0]
+        if ball["ballrect"].top < 0 or ball["ballrect"].bottom > height:
+            ball["speed"][1] = -ball["speed"][1]
+
+        # Accelerates ball
+        ball["speed"] = ballmotion.calc_speed(ball["speed"], gravity, fps)
+
+        pygame.draw.circle(
+            screen, colour, ball["ballrect"].center, radius)
 
     # Updates the screen
     pygame.display.flip()
