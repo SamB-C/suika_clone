@@ -1,6 +1,8 @@
 from typing import List
 from dict_types import BallType
 
+WALL_WIDTH = 20
+
 
 DARK_RED1: BallType = {
     "colour": (139, 0, 0),

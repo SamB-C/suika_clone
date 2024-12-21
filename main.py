@@ -1,6 +1,6 @@
 import sys
 import pygame
-from balls import BALLS
+from constants import BALLS, WALL_WIDTH
 from typing import List
 from dict_types import BallRectType
 from ball_functions import create_ball, coordinates_of_ball_in_center_of_screen, get_random_top_position
@@ -27,16 +27,18 @@ gravity = 9.8
 #  Creates the balls
 balls: List[BallRectType] = []
 for i in range(1):
+    # Get coordinates of where to place top left corner of ball
     x, y = get_random_top_position(
-        width, height, BALLS[i]["radius"])
-    balls.append(create_ball(i+1, x, y, speed))
+        width, height, BALLS[0]["radius"])
+    # Create ball and add to the list of balls
+    balls.append(create_ball(1, x, y, speed))
 
 # Box
-wallleft = pygame.Surface((20, height))
+wallleft = pygame.Surface((WALL_WIDTH, height))
 wallleft.fill((255, 255, 255))
-wallright = pygame.Surface((20, height))
+wallright = pygame.Surface((WALL_WIDTH, height))
 wallright.fill((255, 255, 255))
-wallbottom = pygame.Surface((width, 20))
+wallbottom = pygame.Surface((width, WALL_WIDTH))
 wallbottom.fill((255, 255, 255))
 
 wallleftrect = wallleft.get_rect(topleft=(0, 0))

@@ -1,4 +1,4 @@
-from balls import BALLS
+from constants import BALLS, WALL_WIDTH
 from pygame import Rect
 from random import randint
 
@@ -10,7 +10,8 @@ def coordinates_of_ball_in_center_of_screen(screen_width, screen_height, ball_ra
 
 def get_random_top_position(screen_width, screen_height, ball_radius):
     '''Returns the x and y coordinates of a ball at the top of the screen'''
-    x = ball_radius + randint(0, screen_width - (2 * ball_radius))
+    margin = ball_radius + WALL_WIDTH + 5
+    x = margin + randint(0, screen_width - (2 * (margin)))
     return x, 0
 
 
