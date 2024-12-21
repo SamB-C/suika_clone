@@ -3,7 +3,7 @@ import pygame
 pygame.init()
 
 # Sets width and height of the screen
-size = width, height = 320, 240
+size = width, height = 600, 600
 speed = [2, 2]
 black = 0, 0, 0
 
@@ -11,8 +11,9 @@ black = 0, 0, 0
 screen = pygame.display.set_mode(size)
 
 # Loads the image
-ball = pygame.image.load("intro_ball.gif")
-ballrect = ball.get_rect()
+radius = 20
+ballrect = pygame.Rect(width // 2 - radius, height //
+                       2 - radius, radius * 2, radius * 2)
 
 # Main loop
 while True:
@@ -23,6 +24,8 @@ while True:
 
     # Moves the ball
     ballrect = ballrect.move(speed)
+
+    # Logic for ball to bounce
     if ballrect.left < 0 or ballrect.right > width:
         speed[0] = -speed[0]
     if ballrect.top < 0 or ballrect.bottom > height:
@@ -31,6 +34,6 @@ while True:
     # Fills the screen with black
     screen.fill(black)
     # Draws the ball
-    screen.blit(ball, ballrect)
+    pygame.draw.circle(screen, (255, 255, 255), ballrect.center, radius)
     # Updates the screen
     pygame.display.flip()
