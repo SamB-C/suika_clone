@@ -49,7 +49,6 @@ while True:
     screen.fill(black)
 
     # Draws the ball
-    screen.blit(ball, ballrect)
     screen.blit(wallleft, wallleftrect)
     screen.blit(wallright, wallrightrect)
     screen.blit(wallbottom, wallbottomrect)
