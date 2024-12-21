@@ -40,6 +40,9 @@ def calculate_speed_after_collision(ball1: BallRectType, ball2: BallRectType):
     # Get the distance between the centers of the balls
     distance = get_distance_between_ball_centers(ball1, ball2)
 
+    if distance == 0:
+        return [-speed1[0], -speed1[1]], [-speed2[0], -speed2[1]]
+
     # Get the unit vector of the direction of the collision
     direction = [(ball2["ballrect"].center[0] - ball1["ballrect"].center[0]) /
                  distance, (ball2["ballrect"].center[1] - ball1["ballrect"].center[1]) / distance]
