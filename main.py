@@ -3,7 +3,7 @@ import pygame
 from constants import BALLS, WALL_WIDTH
 from typing import List
 from dict_types import BallRectType
-from ball_functions import reduce_speed, create_ball, coordinates_of_ball_in_center_of_screen, get_random_top_position, get_random_speed, get_distance_between_ball_centers, get_speed_magnitude, calculate_speed_after_collision
+from ball_functions import reduce_speed, create_ball, coordinates_of_ball_in_center_of_screen, get_random_speed, get_distance_between_ball_centers, get_speed_magnitude, calculate_speed_after_collision
 from settings import fps
 
 from ballmotion import close_to_floor, calc_speed, calc_friction, on_floor
@@ -50,10 +50,10 @@ while True:
         if event.type == pygame.QUIT:
             sys.exit()
         if event.type == pygame.MOUSEBUTTONUP:
-            x, y = get_random_top_position(
-                width, height, BALLS[0]["radius"])
+            mouse_x, _ = pygame.mouse.get_pos()
+            x = mouse_x
+            y = 0
             speed = get_random_speed()
-            # Create ball and add to the list of balls
             balls.append(create_ball(0, x, y, speed))
 
     # Fills the screen with black
