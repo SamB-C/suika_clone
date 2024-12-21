@@ -78,8 +78,9 @@ while True:
             ball["speed"][1] = -ball["speed"][1]
 
         # Accelerates ball
-        if not ballmotion.close_to_bottom(ball["ballrect"], wallbottomrect.top):
-            ball["speed"] = ballmotion.calc_speed(ball["speed"], gravity, fps)
+        if not close_to_floor(ball["ballrect"], wallbottomrect.top):
+            ball["speed"] = calc_speed(
+                ball["speed"], gravity, fps, walls, ball["ballrect"])
 
         pygame.draw.circle(
             screen, colour, ball["ballrect"].center, radius)
