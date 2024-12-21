@@ -26,7 +26,7 @@ gravity = 9.8
 
 #  Creates the balls
 balls: List[BallRectType] = []
-for i in range(len(BALLS)):
+for i in range(1):
     x, y = get_random_top_position(
         width, height, BALLS[i]["radius"])
     balls.append(create_ball(i+1, x, y, speed))
