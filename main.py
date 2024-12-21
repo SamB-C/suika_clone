@@ -88,6 +88,13 @@ while True:
             ball["ballrect"].bottom = wallbottomrect.top
             ball["speed"][1] = -0.8 * ball["speed"][1]
 
+        # Ball collisions wuth other balls
+        for other_ball in balls:
+            if other_ball != ball:
+                if ball["ballrect"].colliderect(other_ball["ballrect"]):
+                    ball["speed"][0] = -ball["speed"][0]
+                    ball["speed"][1] = -ball["speed"][1]
+
         # Checks whether ball should be accelerated then accelerates ball
         if not close_to_floor(ball["ballrect"], wallbottomrect.top):
             ball["speed"] = calc_speed(
