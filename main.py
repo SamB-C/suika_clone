@@ -3,7 +3,7 @@ import pygame
 from constants import BALLS, WALL_WIDTH
 from typing import List
 from dict_types import BallRectType
-from ball_functions import create_ball, coordinates_of_ball_in_center_of_screen, get_random_top_position, get_random_speed, get_distance_between_ball_centers, get_speed_magnitude
+from ball_functions import create_ball, coordinates_of_ball_in_center_of_screen, get_random_top_position, get_random_speed, get_distance_between_ball_centers, get_speed_magnitude, calculate_speed_after_collision
 from settings import balls_to_create, fps
 
 from ballmotion import close_to_floor, calc_speed, calc_friction, on_floor
@@ -93,8 +93,10 @@ while True:
         for other_ball in balls:
             if other_ball != ball:
                 if ball["ballrect"].colliderect(other_ball["ballrect"]):
-                    ball["speed"][0] = -ball["speed"][0]
-                    ball["speed"][1] = -ball["speed"][1]
+                    # ball["speed"][0] = -ball["speed"][0]
+                    # ball["speed"][1] = -ball["speed"][1]
+                    ball["speed"], other_ball["speed"] = calculate_speed_after_collision(
+                        ball, other_ball)
                     # Get distance between ball centers
                     diff_centres = get_distance_between_ball_centers(
                         ball, other_ball)
@@ -103,7 +105,7 @@ while True:
                     # If the balls are too close, move them apart
                     if other_ball_speed < 2 * diff_centres:
                         other_ball["ballrect"] = other_ball["ballrect"].move(
-                            other_ball["speed"][0] * 2, other_ball["speed"][1] * 2)
+                            other_ball["speed"][0] * 3, other_ball["speed"][1] * 3)
 
         # Checks whether ball should be accelerated then accelerates ball
         if not close_to_floor(ball["ballrect"], wallbottomrect.top):
