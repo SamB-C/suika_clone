@@ -56,7 +56,14 @@ while True:
             x = mouse_x
             y = 0
             speed = get_random_speed()
+
+            # Sets type of ball
+            ball_num = 0
             balls.append(create_ball(0, x, y, speed))
+
+            # Finds score associated with ball and adds to score
+            score_to_add = BALLS[ball_num]["score"]
+            score_board.add_to_score(score_to_add)
 
     # Fills the screen with black
     screen.fill(black)
@@ -95,9 +102,11 @@ while True:
                 if balls_colliding(ball, other_ball):
                     if ball["ball_constants"]["radius"] == other_ball["ball_constants"]["radius"] and not ball["ball_constants"]["radius"] == BALLS[-1]["radius"]:
                         balls.pop(index)
-                        ball["ball_constants"] = BALLS[ball["ball_constants"]["id"]]
+                        ball_id = ball["ball_constants"]["id"]
+                        ball["ball_constants"] = BALLS[ball_id]
                         ball["ballrect"] = ball["ballrect"].inflate(
                             ball["ball_constants"]["radius"], ball["ball_constants"]["radius"])
+                        score_board.add_to_score(BALLS[ball_id]["score"])
                     else:
                         ball["speed"], other_ball["speed"] = calculate_speed_after_collision(
                             ball, other_ball)
@@ -125,7 +134,6 @@ while True:
         pygame.draw.circle(screen, colour, ball["ballrect"].center, radius)
 
     screen.blit(score_board.board, (10, 10))
-    score_board.add_to_score(1)
 
     # Updates the screen
     pygame.display.flip()
