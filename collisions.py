@@ -1,6 +1,24 @@
 from ball_functions import get_distance_between_ball_centers
 from dict_types import BallRectType
 from math import sqrt
+from pygame import Rect
+
+
+def check_ball_collisions(current_ball: BallRectType, balls: list[BallRectType]):
+    pass
+
+
+def check_wall_collisions(ball: BallRectType, wallleftrect: Rect, wallrightrect: Rect, wallbottomrect: Rect):
+    '''Checks for collisions between the ball and the walls'''
+    if ball["ballrect"].left < wallleftrect.right:
+        ball["ballrect"].left = wallleftrect.right
+        ball["speed"][0] = -ball["speed"][0]
+    if ball["ballrect"].right > wallrightrect.left:
+        ball["ballrect"].right = wallrightrect.left
+        ball["speed"][0] = -ball["speed"][0]
+    if ball["ballrect"].bottom > wallbottomrect.top:
+        ball["ballrect"].bottom = wallbottomrect.top
+        ball["speed"][1] = -0.8 * ball["speed"][1]
 
 
 def balls_colliding(ball1: BallRectType, ball2: BallRectType) -> bool:

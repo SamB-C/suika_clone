@@ -5,7 +5,7 @@ from typing import List
 from dict_types import BallRectType
 from ball_functions import get_random_ball, reduce_speed, create_ball, get_distance_between_ball_centers, get_speed_magnitude
 from settings import fps
-from collisions import balls_colliding, calculate_speed_after_collision, calculate_merge_speed
+from collisions import balls_colliding, calculate_speed_after_collision, calculate_merge_speed, check_wall_collisions
 from ui import ScoreBoard
 from ballmotion import close_to_floor, calc_speed, calc_friction, on_floor
 from random import randint
@@ -98,15 +98,9 @@ def main_loop():
         # Move ball
         ball["ballrect"] = ball["ballrect"].move(ball["speed"])
 
-        if ball["ballrect"].left < wallleftrect.right:
-            ball["ballrect"].left = wallleftrect.right
-            ball["speed"][0] = -ball["speed"][0]
-        if ball["ballrect"].right > wallrightrect.left:
-            ball["ballrect"].right = wallrightrect.left
-            ball["speed"][0] = -ball["speed"][0]
-        if ball["ballrect"].bottom > wallbottomrect.top:
-            ball["ballrect"].bottom = wallbottomrect.top
-            ball["speed"][1] = -0.8 * ball["speed"][1]
+        # Check for collisions with walls
+        check_wall_collisions(ball, wallleftrect,
+                              wallrightrect, wallbottomrect)
 
         # Ball collisions wuth other balls
         for index, other_ball in enumerate(balls):
